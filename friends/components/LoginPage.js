@@ -44,8 +44,19 @@ class Login extends React.Component {
     return (
       <div className="formBody">
         <h1 className="title">Login</h1>
-        <form onSubmit={this.Login}></form>
+        <form onSubmit={this.Login}>
+          <input
+            type="text"
+            name="username"
+            value={this.state.credentials.username}
+            onChange={this.handleChange}
+            placeHolder="UserName:"
+          />
+          <button>Log In </button>
+        </form>
       </div>
     );
   }
 }
+
+export default Login;
