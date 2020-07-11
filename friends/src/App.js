@@ -4,6 +4,8 @@ import "./App.css";
 import Login from "./components/LoginPage";
 import PrivateRoute from "./components/PrivateRoute";
 import { PrivateRoute as Router, Route, Switch } from "react-router-dom";
+
+//Create routes for pages created.
 function App() {
   return (
     <Router>

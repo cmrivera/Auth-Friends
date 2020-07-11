@@ -41,6 +41,7 @@ class Login extends React.Component {
     localStorage.clear();
   }
   render() {
+    //create form for logging in, take given credentials and handlechanges created above
     return (
       <div className="formBody">
         <h1 className="title">Login</h1>
@@ -51,6 +52,13 @@ class Login extends React.Component {
             value={this.state.credentials.username}
             onChange={this.handleChange}
             placeHolder="UserName:"
+          />
+          <input
+            type="password"
+            name="password"
+            value={this.state.credentials.password}
+            onChange={this.handleChange}
+            placeHolder="Password:"
           />
           <button>Log In </button>
         </form>
