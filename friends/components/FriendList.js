@@ -40,16 +40,17 @@ class FriendsList extends React.Component {
             {this.state.friends.map(friend => {
               return (
                 <ul key={friend.id}>
-                  <li><h1>Name:{friend.name}</h1></li>
-                  <li><p>Age:{friend.age}</p></li>
-                  <li><p>Email:{friend.email}</p></li>
+                  <li>Name:{friend.name}</li>
+                  <li>Age:{friend.age}</li>
+                  <li>Email:{friend.email}</li>
                 </ul>
                 <button className='button'>Delete</button>
                 <button className='button'>Edit</button>
-              );
+              )
+              
             })}
             </div>
-        )}
+          )}
       </div>
     )
   }
