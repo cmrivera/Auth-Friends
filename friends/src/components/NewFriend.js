@@ -1,73 +1,61 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import "../App.css";
-import { AxiosWithAuth } from "/components/AxiosWithAuth";
+import { AxiosWithAuth } from "../api/axiosWithAuth";
 
 //create class component and set this.state for name, age, email
-class NewFriend extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: "",
-      age: "",
-      email: "",
-    };
-  }
-
-  //create handle change with event to setState
-  handleChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
+const NewFriend = (props) => {
+  const [value, setValue] = useState({});
 
   //create submit handle not to reset everything
   //then post to axios with authentication
-  submitHandle = (e) => {
+  const submitFriend = (e) => {
     e.preventDefault();
-
     AxiosWithAuth()
-      .post("/api/friends", this.state)
-      .then((response) => {
-        this.setState({ name: "", age: "", email: "" });
-      })
-      .catch((error) => {
-        console.log(error);
+      .post("http://localhost:5000/api/friends", value)
+      .then((res) => {
+        console.log(res);
+        props.history.push("/FriendList");
       });
-    this.setState({ name: "", age: "", email: "" });
   };
-  render() {
-    return (
-      <div>
-        <Header />
 
-        <div>
-          <h1>Add New Friend</h1>
-          <form onSubmit={this.submitHandle}>
-            <input
-              type="text"
-              name="name"
-              value={this.state.name}
-              onChange={this.handleChange}
-              placeHolder="Name:"
-            />
-            <input
-              type="number"
-              name="age"
-              value={this.state.age}
-              onChange={this.handleChange}
-              placeHolder="Age:"
-            />
-            <input
-              type="email"
-              name="email"
-              value={this.state.email}
-              onChange={this.handleChange}
-              placeHolder="Email:"
-            />
-            <button type="submit"> Add New</button>
-          </form>
-        </div>
-      </div>
-    );
-  }
-}
+  //create handle change with event to setState
+  const handleChange = (e) => {
+    setValue({
+      ...value,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  return (
+    <div>
+      <h1>Add New Friend</h1>
+      <form onSubmit={submitFriend}>
+        <input
+          type="text"
+          name="name"
+          value={value.name}
+          onChange={handleChange}
+          placeHolder="Name:"
+        />
+        <input
+          type="number"
+          name="age"
+          value={value.age}
+          onChange={handleChange}
+          placeHolder="Age:"
+        />
+        <input
+          type="email"
+          name="email"
+          value={value.email}
+          onChange={handleChange}
+          placeHolder="Email:"
+        />
+        <button type="submit"> Add New</button>
+      </form>
+    </div>
+  );
+};
+
 export default NewFriend;
